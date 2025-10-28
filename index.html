@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curriculum Vitae - Asimétrico Centrado - [Tu Nombre]</title>
+  <title>Curriculum Vitae - Julio César Saráuz</title>
+
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
     :root {
@@ -18,7 +21,6 @@
       --overlap-amount: 25px;
     }
 
-    /* RESET */
     html, body {
       margin: 0;
       padding: 0;
@@ -28,7 +30,6 @@
       color: #333;
     }
 
-    /* CONTENEDOR PRINCIPAL */
     .cv-container {
       width: 750px;
       margin: 0 auto;
@@ -87,7 +88,6 @@
       text-decoration: none;
     }
 
-    /* FOTO */
     .header-photo-container {
       position: absolute;
       right: 0;
@@ -113,7 +113,6 @@
       box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
 
-    /* CONTENIDO EN DOS COLUMNAS */
     .content-grid {
       display: grid;
       grid-template-columns: 35% 65%;
@@ -138,6 +137,16 @@
       padding-bottom: 5px;
       margin: 0 0 8px 0;
       color: var(--color-acento-claro);
+    }
+
+    .left-column p {
+      margin: 3px 0;
+      font-size: 0.95em;
+    }
+
+    .left-column a {
+      color: var(--color-acento-claro);
+      text-decoration: none;
     }
 
     .right-column {
@@ -167,45 +176,62 @@
 </head>
 <body>
 
-<!-- CONTENEDOR DEL CV -->
 <div class="cv-container" id="cv">
+
   <!-- CABECERA -->
-  <header class="header-main">
-    <div class="header-info-box">
-      <h1>[TU NOMBRE COMPLETO]</h1>
-      <p>[Tu Título Profesional o Cargo Objetivo]</p>
-      <div class="contact-info">
-        <div>Teléfono: [+XX XXXXXXXXX]</div>
-        <div>Email: <a href="mailto:[correo.profesional@ejemplo.com]">correo.profesional@ejemplo.com</a></div>
-        <div>LinkedIn: <a href="[Tu URL de LinkedIn]" target="_blank">linkedin.com/in/tu-perfil</a></div>
-      </div>
+<header class="header-main">
+  <div class="header-info-box">
+  <h1>
+    <span style="color:white;">Julio César </span>
+    <span style="color:#3498db;">Saráuz Rivadeneira</span>
+  </h1>
+    <p>Ingeniero en Ciencias de la Computación</p>
+    <div class="contact-info">
+      <div>Teléfono: +593 961824593</div>
+      <div>LinkedIn: <a href="#" target="_blank">linkedin.com/in/tu-perfil</a></div>
     </div>
-    <div class="header-photo-container">
-      <img src="https://picsum.photos/id/1025/150/150" alt="Foto de perfil">
-    </div>
-  </header>
+  </div>
+  <div class="header-photo-container">
+    <img src="https://picsum.photos/id/1025/150/150" alt="Foto de perfil">
+  </div>
+</header>
+
+
 
   <!-- CONTENIDO EN DOS COLUMNAS -->
   <div class="content-grid">
-    <!-- COLUMNA IZQUIERDA -->
-    <div class="left-column">
-      <div>
-        <h2>Perfil Profesional</h2>
-        <p>Ingeniero con amplia experiencia en desarrollo de software y optimización de procesos empresariales. Capacidad analítica, liderazgo y compromiso con la innovación tecnológica.</p>
-      </div>
-      <div>
-        <h2>Habilidades</h2>
-        <p>Desarrollo Full Stack (Angular, NestJS, Node.js), Arquitectura Cloud (AWS, Azure), Bases de Datos SQL y NoSQL, Seguridad y DevOps.</p>
-      </div>
-      <div>
-        <h2>Idiomas</h2>
-        <p>Español (nativo)<br>Inglés (avanzado)</p>
-      </div>
-      <div>
-        <h2>Referencias Personales</h2>
-        <p>Disponibles a solicitud.</p>
-      </div>
-    </div>
+ <!-- COLUMNA IZQUIERDA -->
+<div class="left-column">
+ <div>
+  <h2>Datos Personales</h2>
+  <p style="font-size:0.85em; margin:4px 0;"><i class="fas fa-calendar-alt" style="width:18px;"></i> Quito, 28 de abril de 1998</p>
+  <p style="font-size:0.85em; margin:4px 0;"><i class="fas fa-map-marker-alt" style="width:18px;"></i> Conocoto, Pichincha, Ecuador</p>
+  <p style="font-size:0.85em; margin:4px 0;"><i class="fas fa-envelope" style="width:18px;"></i> <a href="mailto:juliosarauz1i@gmail.com">juliosarauz1i@gmail.com</a></p>
+  <p style="font-size:0.85em; margin:4px 0;"><i class="fas fa-flag" style="width:18px;"></i> Ecuatoriano</p>
+  <p style="font-size:0.85em; margin:4px 0;"><i class="fab fa-github" style="width:18px;"></i> <a href="https://github.com/JulioSarauz" target="_blank">github.com/JulioSarauz</a></p>
+</div>
+
+
+  <div>
+    <h2>Perfil Profesional</h2>
+    <p style="font-size:0.9em; margin:4px 0;">Ingeniero con amplia experiencia en desarrollo de software y optimización de procesos empresariales. Capacidad analítica, liderazgo y compromiso con la innovación tecnológica.</p>
+  </div>
+
+  <div>
+    <h2>Habilidades</h2>
+    <p style="font-size:0.9em; margin:4px 0;">Desarrollo Full Stack (Angular, NestJS, Node.js), Arquitectura Cloud (AWS, Azure), Bases de Datos SQL y NoSQL, Seguridad y DevOps.</p>
+  </div>
+
+  <div>
+    <h2>Idiomas</h2>
+    <p style="font-size:0.9em; margin:4px 0;">Español (nativo)<br>Inglés (avanzado)</p>
+  </div>
+
+  <div>
+    <h2>Referencias</h2>
+    <p style="font-size:0.9em; margin:4px 0;">Disponibles a solicitud.</p>
+  </div>
+</div>
 
     <!-- COLUMNA DERECHA -->
     <div class="right-column">
@@ -232,24 +258,10 @@
   </div>
 </div>
 
-<!-- BOTON DESCARGAR PDF FUERA DEL CV -->
-<button id="downloadPdf" style="display:block;margin:30px auto;padding:12px 25px;font-size:1em;background-color:#3498db;color:white;border:none;border-radius:8px;cursor:pointer;">
-  Descargar CV en PDF
-</button>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 <script>
-document.getElementById('downloadPdf').addEventListener('click', () => {
-  const element = document.getElementById('cv');
-  const opt = {
-    margin: 0,
-    filename: 'CV_TuNombre.pdf',
-    image: { type: 'jpeg', quality: 1 },
-    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-    jsPDF: { unit: 'px', format: [element.scrollWidth, element.scrollHeight], orientation: 'portrait' }
-  };
-  html2pdf().set(opt).from(element).save();
-});
+  // Puedes mantener el botón de descarga si lo deseas o eliminarlo
+  // Este script se mantiene listo para generar PDF sin márgenes
 </script>
 
 </body>
