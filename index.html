@@ -7,13 +7,15 @@
 
   <!-- Font Awesome para iconos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- jsPDF para exportar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <style>
     :root {
       --color-principal-dark: #0f1532;
       --color-acento-claro: #3498db;
-      --color-texto-en-info-box: #ffffff;
       --color-info-box-bg: #2c3e50;
+      --color-texto-en-info-box: #ffffff;
       --color-fondo-cv: #f8f8f8;
       --color-separador: #4a667f;
       --photo-size: 150px;
@@ -24,18 +26,36 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      background-color: #f4f4f4;
       font-family: 'Arial', 'Verdana', sans-serif;
+      background-color: #f4f4f4;
       color: #333;
     }
 
     .cv-container {
       width: 750px;
-      margin: 0 auto;
+      margin: 20px auto;
       background-color: var(--color-fondo-cv);
       padding: 40px 60px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    /* BOTÓN DESCARGAR PDF */
+    .btn-download {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: var(--color-acento-claro);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn-download:hover {
+      background-color: #2c80b4;
     }
 
     .header-main {
@@ -172,11 +192,21 @@
       line-height: 1.5em;
       text-align: justify;
     }
+
+    .edu-list { list-style: none; padding: 0; margin: 0; }
+    .edu-item { display: flex; align-items: flex-start; margin-bottom: 18px; position: relative; }
+    .edu-item i { font-size: 1.3em; color: #fff; background-color: var(--color-acento-claro); padding: 10px; border-radius: 50%; margin-right: 12px; margin-top: 3px; box-shadow: 0 3px 6px rgba(0,0,0,0.3); flex-shrink: 0; }
+    .edu-content h4 { margin: 0 0 3px 0; color: var(--color-principal-dark); font-size: 0.95em; }
+    .edu-content span { font-size: 0.85em; color: #777; }
+    .edu-item::before { content: ''; position: absolute; left: 19px; top: 0; bottom: -4px; width: 2px; background: var(--color-acento-claro); z-index: -1; }
   </style>
 </head>
 <body>
 
 <div class="cv-container" id="cv">
+
+  <!-- BOTÓN DESCARGAR PDF -->
+  <button class="btn-download" onclick="downloadPDF()">Descargar PDF</button>
 
   <!-- CABECERA -->
   <header class="header-main">
@@ -198,6 +228,7 @@
 
   <!-- CONTENIDO EN DOS COLUMNAS -->
   <div class="content-grid">
+
     <!-- COLUMNA IZQUIERDA -->
     <div class="left-column">
       <div>
@@ -229,20 +260,47 @@
     <div class="right-column">
       <div class="section">
         <h3>Perfil Profesional</h3>
-        <p>Soy Ingeniero en Ciencias de la Computación y Máster en Ingeniería de Software y Sistemas Informáticos, con experiencia como desarrollador full stack, manejo de frameworks modernos, integraciones externas y prácticas de CI/CD. En la Cooperativa de Ahorro y Crédito 29 de Octubre Ltda., desarrollé soluciones web, automatizaciones y plataformas para consultar perfiles financieros de prospectos.</p>
-        <p>Poseo sólidos conocimientos en arquitecturas de nube (Azure y AWS), especialmente en Microsoft Azure, implementando soluciones con DevOps, contenedores y despliegues automatizados. Certificado como Auditor Interno ISO 9001:2015, con conocimientos básicos de finanzas y economía popular y solidaria. Soy responsable, proactivo y apasionado por la programación y la innovación tecnológica.</p>
+        <p>Soy Ingeniero en Ciencias de la Computación y Máster en Ingeniería de Software y Sistemas Informáticos, con experiencia como desarrollador full stack, integrando apps transaccionales, soluciones web y automatizaciones institucionales.</p>
+        <p>Poseo conocimientos sólidos en arquitecturas de nube (Azure y AWS), CI/CD, contenedores y DevOps. Certificado como Auditor Interno ISO 9001:2015, con experiencia en banca y finanzas, responsable, proactivo y apasionado por la programación y la innovación tecnológica.</p>
       </div>
 
       <div class="section">
         <h3>Formación Académica</h3>
-        <p>Máster en Ingeniería de Software y Sistemas Informáticos – UNIR (España, 2024)<br>
-           Ingeniero en Sistemas – Universidad Central del Ecuador (2005)</p>
+        <ul class="edu-list">
+          <li class="edu-item">
+            <i class="fas fa-graduation-cap"></i>
+            <div class="edu-content">
+              <h4>UNIR | Máster Universitario en Ingeniería de Software y Sistemas Informáticos</h4>
+              <span>2025</span>
+            </div>
+          </li>
+          <li class="edu-item">
+            <i class="fas fa-graduation-cap"></i>
+            <div class="edu-content">
+              <h4>Universidad Politécnica Salesiana | Ingeniería en Ciencias de la Computación</h4>
+              <span>2022</span>
+            </div>
+          </li>
+          <li class="edu-item">
+            <i class="fas fa-graduation-cap"></i>
+            <div class="edu-content">
+              <h4>Instituto Tecnológico Superior “Benito Juárez” | Bachiller en Aplicaciones Informáticas</h4>
+              <span>2016</span>
+            </div>
+          </li>
+          <li class="edu-item">
+            <i class="fas fa-school"></i>
+            <div class="edu-content">
+              <h4>Escuela Fiscal “José Miguel Leoro Vásquez” | Primaria</h4>
+              <span>2010</span>
+            </div>
+          </li>
+        </ul>
       </div>
 
       <div class="section">
         <h3>Experiencia Laboral</h3>
-        <p>Cooperativa de Ahorro y Crédito 29 de Octubre – Arquitecto de Soluciones (2018–Actualidad)<br>
-           Diseño de arquitecturas escalables, integración de APIs y liderazgo técnico en proyectos de transformación digital.</p>
+        <p>Cooperativa de Ahorro y Crédito 29 de Octubre – Arquitecto de Soluciones (2018–Actualidad). Diseño de arquitecturas escalables, integración de APIs y liderazgo técnico en proyectos de transformación digital.</p>
       </div>
 
       <div class="section">
@@ -256,8 +314,24 @@
            Curso de Ciberseguridad Aplicada – Cisco Networking Academy (2022)</p>
       </div>
     </div>
+
   </div>
 </div>
+
+<script>
+  function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'pt', 'a4');
+    doc.html(document.getElementById("cv"), {
+      callback: function (doc) {
+        doc.save("CV_Julio_Sarauz.pdf");
+      },
+      x: 20,
+      y: 20,
+      html2canvas: { scale: 0.55 } // Ajusta la escala para que quepa mejor
+    });
+  }
+</script>
 
 </body>
 </html>
