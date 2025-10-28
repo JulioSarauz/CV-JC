@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum Vitae - Asimétrico Centrado - [Tu Nombre]</title>
+
+  <style>
+    :root {
+      --color-principal-dark: #0f1532;
+      --color-acento-claro: #3498db;
+      --color-texto-en-info-box: #ffffff;
+      --color-info-box-bg: #2c3e50;
+      --color-fondo-cv: #f8f8f8;
+      --color-separador: #4a667f;
+      --photo-size: 150px;
+      --photo-border: 6px;
+      --overlap-amount: 25px;
+    }
+
+    /* RESET */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #f4f4f4;
+      font-family: 'Arial', 'Verdana', sans-serif;
+      color: #333;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .cv-container {
+      width: 750px;
+      margin: 0 auto;
+      background-color: var(--color-fondo-cv);
+      padding: 40px 60px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    /* CABECERA */
+    .header-main {
+      position: relative;
+      height: var(--photo-size);
+      margin-bottom: 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-info-box {
+      background-color: var(--color-info-box-bg);
+      color: var(--color-texto-en-info-box);
+      padding: 20px 30px;
+      margin-right: calc(var(--photo-size) - var(--overlap-amount));
+      border-radius: 0 150px 150px 0;
+      box-shadow: 3px 3px 12px rgba(0,0,0,0.3);
+      border-left: 8px solid var(--color-acento-claro);
+      position: relative;
+      z-index: 5;
+      height: var(--photo-size);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .header-info-box h1 {
+      font-size: 2.2em;
+      margin: 0 0 5px 0;
+      text-transform: uppercase;
+    }
+
+    .header-info-box p {
+      font-size: 1.1em;
+      color: var(--color-acento-claro);
+      margin: 0 0 10px 0;
+      font-weight: bold;
+    }
+
+    .contact-info div {
+      font-size: 0.9em;
+      color: #ccc;
+      display: inline-block;
+      margin-right: 18px;
+    }
+
+    .contact-info a {
+      color: var(--color-acento-claro);
+      text-decoration: none;
+    }
+
+    /* FOTO */
+    .header-photo-container {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: calc(var(--photo-size) + 30px);
+      height: calc(var(--photo-size) + 30px);
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .header-photo-container img {
+      width: var(--photo-size);
+      height: var(--photo-size);
+      border-radius: 50%;
+      object-fit: cover;
+      border: var(--photo-border) solid white;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    /* CONTENIDO EN DOS COLUMNAS */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 35% 65%;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .left-column {
+      background-color: var(--color-info-box-bg);
+      color: var(--color-texto-en-info-box);
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .left-column h2 {
+      font-size: 1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--color-acento-claro);
+      padding-bottom: 5px;
+      margin: 0 0 8px 0;
+      color: var(--color-acento-claro);
+    }
+
+    .right-column {
+      background-color: #ffffff;
+      padding: 25px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .section h3 {
+      color: var(--color-principal-dark);
+      font-size: 1.2em;
+      margin-bottom: 8px;
+      border-bottom: 2px solid var(--color-separador);
+      display: inline-block;
+      padding-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .section p {
+      margin: 0;
+      font-size: 0.95em;
+      line-height: 1.4em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- CONTENEDOR DEL CV -->
+<div class="cv-container" id="cv">
+  <!-- CABECERA -->
+  <header class="header-main">
+    <div class="header-info-box">
+      <h1>[TU NOMBRE COMPLETO]</h1>
+      <p>[Tu Título Profesional o Cargo Objetivo]</p>
+      <div class="contact-info">
+        <div>Teléfono: [+XX XXXXXXXXX]</div>
+        <div>Email: <a href="mailto:[correo.profesional@ejemplo.com]">correo.profesional@ejemplo.com</a></div>
+        <div>LinkedIn: <a href="[Tu URL de LinkedIn]" target="_blank">linkedin.com/in/tu-perfil</a></div>
+      </div>
+    </div>
+    <div class="header-photo-container">
+      <img src="https://picsum.photos/id/1025/150/150" alt="Foto de perfil">
+    </div>
+  </header>
+
+  <!-- CONTENIDO EN DOS COLUMNAS -->
+  <div class="content-grid">
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="left-column">
+      <div>
+        <h2>Perfil Profesional</h2>
+        <p>Ingeniero con amplia experiencia en desarrollo de software y optimización de procesos empresariales. Capacidad analítica, liderazgo y compromiso con la innovación tecnológica.</p>
+      </div>
+      <div>
+        <h2>Habilidades</h2>
+        <p>Desarrollo Full Stack (Angular, NestJS, Node.js), Arquitectura Cloud (AWS, Azure), Bases de Datos SQL y NoSQL, Seguridad y DevOps.</p>
+      </div>
+      <div>
+        <h2>Idiomas</h2>
+        <p>Español (nativo)<br>Inglés (avanzado)</p>
+      </div>
+      <div>
+        <h2>Referencias Personales</h2>
+        <p>Disponibles a solicitud.</p>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="right-column">
+      <div class="section">
+        <h3>Formación Académica</h3>
+        <p>Máster en Ingeniería de Software y Sistemas Informáticos – UNIR (España, 2024)<br>
+           Ingeniero en Sistemas – Universidad Central del Ecuador (2005)</p>
+      </div>
+      <div class="section">
+        <h3>Experiencia Laboral</h3>
+        <p>Cooperativa de Ahorro y Crédito 29 de Octubre – Arquitecto de Soluciones (2018–Actualidad)<br>
+           Diseño de arquitecturas escalables, integración de APIs y liderazgo técnico en proyectos de transformación digital.</p>
+      </div>
+      <div class="section">
+        <h3>Proyectos Relevantes Realizados</h3>
+        <p>Implementación de servicios financieros digitales y desarrollo de un chatbot interno basado en IA generativa.</p>
+      </div>
+      <div class="section">
+        <h3>Cursos y Certificaciones</h3>
+        <p>Certificación en Cloud Computing – AWS (2023)<br>
+           Curso de Ciberseguridad Aplicada – Cisco Networking Academy (2022)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTON DESCARGAR PDF FUERA DEL CV -->
+<button id="downloadPdf" style="display:block;margin:30px auto;padding:12px 25px;font-size:1em;background-color:#3498db;color:white;border:none;border-radius:8px;cursor:pointer;">
+  Descargar CV en PDF
+</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script>
+document.getElementById('downloadPdf').addEventListener('click', () => {
+  const element = document.getElementById('cv');
+  const opt = {
+    margin: 0,
+    filename: 'CV_TuNombre.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+    jsPDF: { unit: 'px', format: [element.scrollWidth, element.scrollHeight], orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(element).save();
+});
+</script>
+
+</body>
+</html>
