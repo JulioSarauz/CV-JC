@@ -1,337 +1,375 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Curriculum Vitae - Julio César Saráuz</title>
 
-  <!-- Font Awesome para iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <!-- jsPDF para exportar PDF -->
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <!-- Estilos externos -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Librerías para PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-  <style>
-    :root {
-      --color-principal-dark: #0f1532;
-      --color-acento-claro: #3498db;
-      --color-info-box-bg: #2c3e50;
-      --color-texto-en-info-box: #ffffff;
-      --color-fondo-cv: #f8f8f8;
-      --color-separador: #4a667f;
-      --photo-size: 150px;
-      --photo-border: 6px;
-      --overlap-amount: 25px;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', 'Verdana', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    .cv-container {
-      width: 750px;
-      margin: 20px auto;
-      background-color: var(--color-fondo-cv);
-      padding: 40px 60px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      position: relative;
-    }
-
-    /* BOTÓN DESCARGAR PDF */
-    .btn-download {
-      display: inline-block;
-      margin-bottom: 20px;
-      padding: 10px 20px;
-      background-color: var(--color-acento-claro);
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    .btn-download:hover {
-      background-color: #2c80b4;
-    }
-
-    .header-main {
-      position: relative;
-      height: var(--photo-size);
-      margin-bottom: 50px;
-      display: flex;
-      align-items: center;
-    }
-
-    .header-info-box {
-      background-color: var(--color-info-box-bg);
-      color: var(--color-texto-en-info-box);
-      padding: 20px 30px;
-      margin-right: calc(var(--photo-size) - var(--overlap-amount));
-      border-radius: 0 150px 150px 0;
-      box-shadow: 3px 3px 12px rgba(0,0,0,0.3);
-      border-left: 8px solid var(--color-acento-claro);
-      position: relative;
-      z-index: 5;
-      height: var(--photo-size);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .header-info-box h1 {
-      font-size: 2.2em;
-      margin: 0 0 5px 0;
-      text-transform: uppercase;
-    }
-
-    .header-info-box p {
-      font-size: 1.1em;
-      color: var(--color-acento-claro);
-      margin: 0 0 10px 0;
-      font-weight: bold;
-    }
-
-    .contact-info div {
-      font-size: 0.9em;
-      color: #ccc;
-      display: inline-block;
-      margin-right: 18px;
-    }
-
-    .contact-info a {
-      color: var(--color-acento-claro);
-      text-decoration: none;
-    }
-
-    .header-photo-container {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: calc(var(--photo-size) + 30px);
-      height: calc(var(--photo-size) + 30px);
-      background-color: white;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    }
-
-    .header-photo-container img {
-      width: var(--photo-size);
-      height: var(--photo-size);
-      border-radius: 50%;
-      object-fit: cover;
-      border: var(--photo-border) solid white;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 35% 65%;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .left-column {
-      background-color: var(--color-info-box-bg);
-      color: var(--color-texto-en-info-box);
-      padding: 25px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .left-column h2 {
-      font-size: 1em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--color-acento-claro);
-      padding-bottom: 5px;
-      margin: 0 0 8px 0;
-      color: var(--color-acento-claro);
-    }
-
-    .left-column p {
-      margin: 3px 0;
-      font-size: 0.85em;
-    }
-
-    .left-column a {
-      color: var(--color-acento-claro);
-      text-decoration: none;
-    }
-
-    .right-column {
-      background-color: #ffffff;
-      padding: 25px 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .section h3 {
-      color: var(--color-principal-dark);
-      font-size: 1.2em;
-      margin-bottom: 8px;
-      border-bottom: 2px solid var(--color-separador);
-      display: inline-block;
-      padding-bottom: 4px;
-      text-transform: uppercase;
-    }
-
-    .section p {
-      margin: 0 0 10px 0;
-      font-size: 0.9em;
-      line-height: 1.5em;
-      text-align: justify;
-    }
-
-    .edu-list { list-style: none; padding: 0; margin: 0; }
-    .edu-item { display: flex; align-items: flex-start; margin-bottom: 18px; position: relative; }
-    .edu-item i { font-size: 1.3em; color: #fff; background-color: var(--color-acento-claro); padding: 10px; border-radius: 50%; margin-right: 12px; margin-top: 3px; box-shadow: 0 3px 6px rgba(0,0,0,0.3); flex-shrink: 0; }
-    .edu-content h4 { margin: 0 0 3px 0; color: var(--color-principal-dark); font-size: 0.95em; }
-    .edu-content span { font-size: 0.85em; color: #777; }
-    .edu-item::before { content: ''; position: absolute; left: 19px; top: 0; bottom: -4px; width: 2px; background: var(--color-acento-claro); z-index: -1; }
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
+  <div class="cv-container" id="cv">
+    <header class="header-main">
+      <div class="header-info-box">
+        <h1>
+          <span style="color: white;">Julio César</span>
+          <span style="color: #3498db;">Saráuz Rivadeneira</span>
+        </h1>
+        <p>Ingeniero en Ciencias de la Computación</p>
+        <div class="contact-info">
+          <div><i class="fas fa-phone"></i> +593 961824593</div>
+          <div>
+            <i class="fab fa-linkedin"></i>
+            <a href="#" target="_blank">linkedin.com/in/tu-perfil</a>
+          </div>
+        </div>
+      </div>
+      <div class="header-photo-container">
+        <img
+          src="https://picsum.photos/id/1025/150/150"
+          alt="Foto de perfil"
+        />
+      </div>
+    </header>
 
-<div class="cv-container" id="cv">
+    <div class="content-grid">
+      <!-- COLUMNA IZQUIERDA -->
+<div class="left-column">
+  <!-- Datos Personales -->
+  <div>
+    <h2 style="color: var(--color-acento-claro); text-align: justify;">Datos Personales</h2>
+    <p><i class="fas fa-calendar-alt" style="margin-right:8px;"></i> Quito, 28 de abril de 1998</p>
+    <p><i class="fas fa-map-marker-alt" style="margin-right:8px;"></i> Conocoto, Pichincha, Ecuador</p>
+    <p><i class="fas fa-envelope" style="margin-right:8px;"></i>
+      <a href="mailto:juliosarauz1i@gmail.com">juliosarauz1i@gmail.com</a>
+    </p>
+    <p><i class="fas fa-flag" style="margin-right:8px;"></i> Ecuatoriano</p>
+    <p><i class="fab fa-github" style="margin-right:8px;"></i>
+      <a href="https://github.com/JulioSarauz" target="_blank">github.com/JulioSarauz</a>
+    </p>
+  </div>
 
-  <!-- BOTÓN DESCARGAR PDF -->
-  <button class="btn-download" onclick="downloadPDF()">Descargar PDF</button>
-
-  <!-- CABECERA -->
-  <header class="header-main">
-    <div class="header-info-box">
-      <h1>
-        <span style="color:white;">Julio César </span>
-        <span style="color:#3498db;">Saráuz Rivadeneira</span>
-      </h1>
-      <p>Ingeniero en Ciencias de la Computación</p>
-      <div class="contact-info">
-        <div>Teléfono: +593 961824593</div>
-        <div>LinkedIn: <a href="#" target="_blank">linkedin.com/in/tu-perfil</a></div>
+  <!-- Habilidades -->
+  <div>
+    <h2 style="color: var(--color-acento-claro); text-align: justify;">Habilidades</h2>
+    <div style="background: var(--color-info-box-bg); color: var(--color-texto-en-info-box); padding: 12px 15px; border-radius: 10px; font-size: 0.85em; line-height: 1.3em; text-align: justify;">
+      <!-- Habilidades con iconos -->
+      <div style="display:flex; align-items:flex-start; margin-bottom:6px;">
+        <i class="fas fa-code" style="width:25px; margin-right:10px; color: var(--color-acento-claro);"></i>
+        <div><strong style="color: var(--color-acento-claro);">Lenguajes:</strong> Java, Python, JavaScript, C#, PHP, Dart, TypeScript, C, Perl, R</div>
+      </div>
+      <div style="display:flex; align-items:flex-start; margin-bottom:6px;">
+        <i class="fas fa-cogs" style="width:25px; margin-right:10px; color: var(--color-acento-claro);"></i>
+        <div><strong style="color: var(--color-acento-claro);">Frameworks / Backend:</strong> Node.js, Express, Nest.js, Flask, JQuery</div>
+      </div>
+      <div style="display:flex; align-items:flex-start; margin-bottom:6px;">
+        <i class="fas fa-desktop" style="width:25px; margin-right:10px; color: var(--color-acento-claro);"></i>
+        <div><strong style="color: var(--color-acento-claro);">Frontend / Web:</strong> React.js, Angular, Vue, HTML5, CSS, SCSS, JSP, JQuery</div>
+      </div>
+      <div style="display:flex; align-items:flex-start; margin-bottom:6px;">
+        <i class="fas fa-database" style="width:25px; margin-right:10px; color: var(--color-acento-claro);"></i>
+        <div><strong style="color: var(--color-acento-claro);">Bases de Datos:</strong> SQL Server, MySQL, PostgreSQL, MongoDB, MDB Atlas, DBeaver</div>
+      </div>
+      <div style="display:flex; align-items:flex-start; margin-bottom:6px;">
+        <i class="fas fa-tools" style="width:25px; margin-right:10px; color: var(--color-acento-claro);"></i>
+        <div><strong style="color: var(--color-acento-claro);">DevOps / Versiones:</strong> Git, GitHub, GitLab, Docker, Azure DevOps, Heroku</div>
+      </div>
+      <div style="display:flex; align-items:flex-start; margin-bottom:6px;">
+        <i class="fas fa-mobile-alt" style="width:25px; margin-right:10px; color: var(--color-acento-claro);"></i>
+        <div><strong style="color: var(--color-acento-claro);">Móvil / Multiplataforma:</strong> Android Studio, Ionic, Firebase</div>
+      </div>
+      <div style="display:flex; align-items:flex-start; margin-bottom:6px;">
+        <i class="fas fa-wrench" style="width:25px; margin-right:10px; color: var(--color-acento-claro);"></i>
+        <div><strong style="color: var(--color-acento-claro);">Herramientas:</strong> VS Code, Arduino, Awk, Inkscape, Gimp, Figma</div>
       </div>
     </div>
-    <div class="header-photo-container">
-      <img src="https://picsum.photos/id/1025/150/150" alt="Foto de perfil">
-    </div>
-  </header>
+  </div>
 
-  <!-- CONTENIDO EN DOS COLUMNAS -->
-  <div class="content-grid">
-
-    <!-- COLUMNA IZQUIERDA -->
-    <div class="left-column">
-      <div>
-        <h2>Datos Personales</h2>
-        <p><i class="fas fa-calendar-alt" style="width:18px;"></i> Quito, 28 de abril de 1998</p>
-        <p><i class="fas fa-map-marker-alt" style="width:18px;"></i> Conocoto, Pichincha, Ecuador</p>
-        <p><i class="fas fa-envelope" style="width:18px;"></i> <a href="mailto:juliosarauz1i@gmail.com">juliosarauz1i@gmail.com</a></p>
-        <p><i class="fas fa-flag" style="width:18px;"></i> Ecuatoriano</p>
-        <p><i class="fab fa-github" style="width:18px;"></i> <a href="https://github.com/JulioSarauz" target="_blank">github.com/JulioSarauz</a></p>
-      </div>
-
-      <div>
-        <h2>Habilidades</h2>
-        <p>Desarrollo Full Stack (Angular, NestJS, Node.js), Arquitectura Cloud (AWS, Azure), Bases de Datos SQL y NoSQL, Seguridad y DevOps.</p>
-      </div>
-
-      <div>
-        <h2>Idiomas</h2>
-        <p>Español (nativo)<br>Inglés (avanzado)</p>
-      </div>
-
-      <div>
-        <h2>Referencias</h2>
-        <p>Disponibles a solicitud.</p>
-      </div>
-    </div>
-
-    <!-- COLUMNA DERECHA -->
-    <div class="right-column">
-      <div class="section">
-        <h3>Perfil Profesional</h3>
-        <p>Soy Ingeniero en Ciencias de la Computación y Máster en Ingeniería de Software y Sistemas Informáticos, con experiencia como desarrollador full stack, integrando apps transaccionales, soluciones web y automatizaciones institucionales.</p>
-        <p>Poseo conocimientos sólidos en arquitecturas de nube (Azure y AWS), CI/CD, contenedores y DevOps. Certificado como Auditor Interno ISO 9001:2015, con experiencia en banca y finanzas, responsable, proactivo y apasionado por la programación y la innovación tecnológica.</p>
-      </div>
-
-      <div class="section">
-        <h3>Formación Académica</h3>
-        <ul class="edu-list">
-          <li class="edu-item">
-            <i class="fas fa-graduation-cap"></i>
-            <div class="edu-content">
-              <h4>UNIR | Máster Universitario en Ingeniería de Software y Sistemas Informáticos</h4>
-              <span>2025</span>
-            </div>
-          </li>
-          <li class="edu-item">
-            <i class="fas fa-graduation-cap"></i>
-            <div class="edu-content">
-              <h4>Universidad Politécnica Salesiana | Ingeniería en Ciencias de la Computación</h4>
-              <span>2022</span>
-            </div>
-          </li>
-          <li class="edu-item">
-            <i class="fas fa-graduation-cap"></i>
-            <div class="edu-content">
-              <h4>Instituto Tecnológico Superior “Benito Juárez” | Bachiller en Aplicaciones Informáticas</h4>
-              <span>2016</span>
-            </div>
-          </li>
-          <li class="edu-item">
-            <i class="fas fa-school"></i>
-            <div class="edu-content">
-              <h4>Escuela Fiscal “José Miguel Leoro Vásquez” | Primaria</h4>
-              <span>2010</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h3>Experiencia Laboral</h3>
-        <p>Cooperativa de Ahorro y Crédito 29 de Octubre – Arquitecto de Soluciones (2018–Actualidad). Diseño de arquitecturas escalables, integración de APIs y liderazgo técnico en proyectos de transformación digital.</p>
-      </div>
-
-      <div class="section">
-        <h3>Proyectos Relevantes</h3>
-        <p>Implementación de servicios financieros digitales y desarrollo de un chatbot interno basado en IA generativa.</p>
-      </div>
-
-      <div class="section">
-        <h3>Cursos y Certificaciones</h3>
-        <p>Certificación en Cloud Computing – AWS (2023)<br>
-           Curso de Ciberseguridad Aplicada – Cisco Networking Academy (2022)</p>
-      </div>
-    </div>
-
+  <!-- Cursos y Certificaciones -->
+  <div class="section">
+  <h3 style="color: var(--color-acento-claro);">Cursos y Certificaciones</h3>
+  <div style="background: var(--color-info-box-bg); color: var(--color-texto-en-info-box); padding: 15px 18px; border-radius: 10px; font-size: 0.85em; line-height:1.4em;">
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">DevOps en acción</strong> - EELA Institute & Universidad de los Hemisferios (120h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">El arte de contar historias</strong> - goodhabitz (6h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Gestión del cambio</strong> - goodhabitz (8h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Trabajo en equipo</strong> - goodhabitz (7h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Angular 11</strong> - Udemy (18h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Git, HTML, Typescript</strong> - Udemy (3-5h cada uno)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Educación Financiera I & II</strong> (5-8h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Impacto Financiero Violencia Mujeres</strong> (5h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Riesgos, Administración y SEPS</strong> (varios, 2-10h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Finanzas Verdes & Auditorías</strong> (2-8h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Microsoft Azure AI</strong> - Achievement (32h) / Azure Basics (8h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Seguridad de la Información</strong> - Microsoft (80h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">SQL & Power BI</strong> - Denarius (8h)</p>
+    <p style="margin:4px 0;"><strong style="color: var(--color-acento-claro);">Captación y Crédito</strong> - 29 de Octubre (2-5h)</p>
   </div>
 </div>
 
-<script>
-  function downloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'pt', 'a4');
-    doc.html(document.getElementById("cv"), {
-      callback: function (doc) {
-        doc.save("CV_Julio_Sarauz.pdf");
-      },
-      x: 20,
-      y: 20,
-      html2canvas: { scale: 0.55 } // Ajusta la escala para que quepa mejor
-    });
-  }
-</script>
+ <!-- Idiomas con barras de progreso imprimibles -->
+<div>
+  <h2 style="color: var(--color-acento-claro); text-align: justify;">Idiomas</h2>
+  <div style="margin-top:12px;">
+    <div style="margin-bottom:14px;">
+      <p style="margin:0 0 4px 0; font-weight:600;">Español (Nativo)</p>
+      <div style="background:#4a667f; border-radius:5px; height:12px; overflow:hidden; position:relative;">
+        <div style="width:100%; height:12px; background: repeating-linear-gradient(
+            45deg,
+            var(--color-acento-claro),
+            var(--color-acento-claro) 4px,
+            #2c3e50 4px,
+            #2c3e50 8px
+          ); border-radius:5px;">
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <p style="margin:0 0 4px 0; font-weight:600;">Inglés (Intermedio)</p>
+      <div style="background:#4a667f; border-radius:5px; height:12px; overflow:hidden; position:relative;">
+        <div style="width:60%; height:12px; background: repeating-linear-gradient(
+            45deg,
+            var(--color-acento-claro),
+            var(--color-acento-claro) 4px,
+            #2c3e50 4px,
+            #2c3e50 8px
+          ); border-radius:5px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Referencias Personales mejoradas -->
+<div>
+  <h2 style="color: var(--color-acento-claro); text-align: justify;">Referencias Personales</h2>
+  <div style="background: var(--color-info-box-bg); color: var(--color-texto-en-info-box); padding:15px 18px; border-radius:10px; font-size:0.85em; line-height:1.5em;">
+    <p style="margin-bottom:10px;">
+      <strong style="color: var(--color-acento-claro);">Andrea Nataly Saráuz Rivadeneira</strong><br>
+      <span style="color:#ccc;">Procuradora Judicial</span><br>
+      <span style="color: var(--color-acento-claro); font-weight:600;">Celular:</span> +593996296751
+    </p>
+    <p style="margin-bottom:10px;">
+      <strong style="color: var(--color-acento-claro);">Luz Angelica Pailacho Martinez</strong><br>
+      <span style="color:#ccc;">Gerente Imak Smart</span><br>
+      <span style="color: var(--color-acento-claro); font-weight:600;">Celular:</span> +593997667941
+    </p>
+    <p style="margin-bottom:10px;">
+      <strong style="color: var(--color-acento-claro);">Beatriz Alexandra Zhinin Ruales</strong><br>
+      <span style="color:#ccc;">Subgerente Tecnología Dinners</span><br>
+      <span style="color: var(--color-acento-claro); font-weight:600;">Celular:</span> +59399835521
+    </p>
+    <p style="margin-bottom:0;">
+      <strong style="color: var(--color-acento-claro);">Sabina Gabriela Zhiminaicela Tapia</strong><br>
+      <span style="color:#ccc;">Jefa de Responsabilidad Social</span><br>
+      <span style="color: var(--color-acento-claro); font-weight:600;">Celular:</span> +593987692511
+    </p>
+  </div>
+</div>
+
+
+</div>
+
+
+
+      <!-- COLUMNA DERECHA -->
+      <div class="right-column">
+        <div class="section">
+          <h3>Perfil Profesional</h3>
+          <p>
+            Ingeniero en Ciencias de la Computación y Máster en Ingeniería
+            de Software y Sistemas Informáticos, con experiencia como
+            desarrollador full stack, integrando apps transaccionales, soluciones
+            web y automatizaciones institucionales.
+          </p>
+          <p>
+            Poseo conocimientos sólidos en arquitecturas de nube (Azure y AWS),
+            CI/CD, contenedores y DevOps. Certificado como Auditor Interno ISO
+            9001:2015, con experiencia en banca y finanzas, responsable,
+            proactivo y apasionado por la programación y la innovación
+            tecnológica.
+          </p>
+        </div>
+
+        <div class="section">
+          <h3>Formación Académica</h3>
+          <ul class="edu-list">
+            <li class="edu-item">
+              <i class="fas fa-graduation-cap"></i>
+              <div class="edu-content">
+                <h4>UNIR | Máster en Ingeniería de Software y Sistemas Informáticos</h4>
+                <span>2025</span>
+              </div>
+            </li>
+            <li class="edu-item">
+              <i class="fas fa-graduation-cap"></i>
+              <div class="edu-content">
+                <h4>Universidad Politécnica Salesiana | Ingeniería en Ciencias de la Computación</h4>
+                <span>2022</span>
+              </div>
+            </li>
+            <li class="edu-item">
+              <i class="fas fa-graduation-cap"></i>
+              <div class="edu-content">
+                <h4>Instituto “Benito Juárez” | Bachiller en Aplicaciones Informáticas</h4>
+                <span>2016</span>
+              </div>
+            </li>
+            <li class="edu-item">
+              <i class="fas fa-school"></i>
+              <div class="edu-content">
+                <h4>Escuela “José Miguel Leoro Vásquez” | Primaria</h4>
+                <span>2010</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Experiencia Laboral</h3>
+          <ul class="exp-list">
+            <li class="exp-item">
+              <i class="fas fa-code"></i>
+              <div class="exp-content">
+                <h4>Analista de Desarrollo | Cooperativa 29 de Octubre</h4>
+                <span>2022 - Actual</span>
+                <p>
+                  Implementación de proyectos innovadores para la automatización
+                  de procesos mediante metodologías ágiles, administración de
+                  ambientes en la nube, y documentación técnica.
+                </p>
+              </div>
+            </li>
+
+            <li class="exp-item">
+              <i class="fas fa-users-cog"></i>
+              <div class="exp-content">
+                <h4>Jefe de Desarrollo (E) | Cooperativa 29 de Octubre</h4>
+                <span>2023</span>
+                <p>
+                  Lideré el equipo de desarrollo, implementando estrategias DevOps
+                  y métricas de desempeño para optimizar los aplicativos internos.
+                </p>
+              </div>
+            </li>
+
+            <li class="exp-item">
+              <i class="fas fa-laptop-code"></i>
+              <div class="exp-content">
+                <h4>Pasante | Cooperativa 29 de Octubre</h4>
+                <span>2021</span>
+                <p>
+                  Diseño y desarrollo de proyectos internos bajo metodologías ágiles.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+ <div class="section">
+  <h3>Proyectos Relevantes Realizados</h3>
+  <ul class="exp-list">
+    <li class="exp-item">
+      <i class="fa-solid fa-mobile-screen-button"></i>
+      <div class="exp-content">
+        <h4>Migración Canales Digitales (WEB/APP) <span>| Cooperativa 29 de Octubre</span></h4>
+        <span>2024</span>
+        <p>
+          Lideré el desarrollo de la app móvil y plataforma web transaccional, con mejor seguridad, escalabilidad y accesibilidad. Implementación conforme a la Ley de Protección de Datos.
+        </p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <i class="fa-solid fa-hand-holding-dollar"></i>
+      <div class="exp-content">
+        <h4>Pago de Corresponsales <span>| Cooperativa 29 de Octubre</span></h4>
+        <span>2023</span>
+        <p>
+          Integración del bus de servicios con la plataforma Facilito, creando una red de pagos que amplió la cobertura y optimizó procesos transaccionales.
+        </p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <i class="fa-solid fa-trophy"></i>
+      <div class="exp-content">
+        <h4>Ruleta29 <span>| Cooperativa 29 de Octubre</span></h4>
+        <span>2023</span>
+        <p>
+          Desarrollé una app que automatiza sorteos con selección aleatoria y reportes, garantizando transparencia y eficiencia en los procesos de premiación.
+        </p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <i class="fa-solid fa-cloud-arrow-up"></i>
+      <div class="exp-content">
+        <h4>Migración Bus de Servicios <span>| Cooperativa 29 de Octubre</span></h4>
+        <span>2023</span>
+        <p>
+          Diseño y migración del bus de servicios hacia Azure con arquitectura modular y autoescalable, reduciendo costos y mejorando la disponibilidad.
+        </p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <i class="fa-solid fa-scale-balanced"></i>
+      <div class="exp-content">
+        <h4>Facturas de Abogados Externos <span>| Cooperativa 29 de Octubre</span></h4>
+        <span>2022</span>
+        <p>
+          Portal para registro y control de pagos de servicios legales, mejorando la eficiencia y transparencia en la gestión jurídica.
+        </p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <i class="fa-solid fa-utensils"></i>
+      <div class="exp-content">
+        <h4>La Weka <span>| Personal</span></h4>
+        <span>2021</span>
+        <p>
+          App cliente-servidor que conecta comensales y locales de comida mediante recomendaciones y promociones. Desarrollada para Android.
+        </p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <i class="fa-solid fa-qrcode"></i>
+      <div class="exp-content">
+        <h4>QR Creador <span>| Personal</span></h4>
+        <span>2025</span>
+        <p>
+          Aplicación móvil híbrida para generar y escanear códigos QR, publicada en Google Play e integrada con AdMob para monetización.
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+<button id="btnPDF" onclick="downloadPDF()">Descargar PDF</button>
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 </body>
 </html>
