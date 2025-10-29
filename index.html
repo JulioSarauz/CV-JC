@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Curriculum Vitae - Julio César Saráuz</title>
 
-  <!-- Font Awesome --><link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-  
-  <!-- Librerías para generación de PDF --><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Librerías para generación de PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <!-- CSS Inlined (Modificado para menos margen lateral) --><style>
+  <!-- CSS Inlined (Modificado para menos margen lateral) -->
+  <style>
     :root {
       --color-principal-dark: #0f1532;
       --color-acento-claro: #3498db;
@@ -26,7 +27,8 @@
       --overlap-amount: 25px;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       font-family: 'Arial', 'Verdana', sans-serif;
@@ -38,7 +40,8 @@
     .pdf-button-container {
       text-align: center;
       margin: 20px auto;
-      width: 210mm; /* Alinear con el CV */
+      width: 210mm;
+      /* Alinear con el CV */
     }
 
     #btnPDF {
@@ -62,7 +65,7 @@
       width: 210mm;
       margin: 20px auto;
       background-color: var(--color-fondo-cv);
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       position: relative;
     }
 
@@ -71,11 +74,13 @@
     .a4-page {
       width: 210mm;
       min-height: 297mm;
-      padding: 15mm 8mm; /* Márgenes laterales reducidos a 8mm */
+      padding: 15mm 8mm;
+      /* Márgenes laterales reducidos a 8mm */
       box-sizing: border-box;
       background: white;
       page-break-after: always;
     }
+
     /* ************************************** */
 
     .header-main {
@@ -89,10 +94,11 @@
     .header-info-box {
       background-color: var(--color-info-box-bg);
       color: var(--color-texto-en-info-box);
-      padding: 20px 25px; /* Ajustado el padding para el nuevo ancho */
+      padding: 20px 25px;
+      /* Ajustado el padding para el nuevo ancho */
       margin-right: calc(var(--photo-size) - var(--overlap-amount));
       border-radius: 0 150px 150px 0;
-      box-shadow: 3px 3px 12px rgba(0,0,0,0.3);
+      box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.3);
       border-left: 8px solid var(--color-acento-claro);
       position: relative;
       z-index: 5;
@@ -143,7 +149,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
 
     .header-photo-container img {
@@ -152,7 +158,7 @@
       border-radius: 50%;
       object-fit: cover;
       border: var(--photo-border) solid white;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
 
     /* Contenedor de grilla (usado dos veces ahora) */
@@ -161,14 +167,14 @@
       grid-template-columns: 35% 65%;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       /* Se añade separación vertical para cumplir con la solicitud */
-      margin-bottom: 30px; 
+      margin-bottom: 30px;
     }
 
     /* El último content-grid no lleva margen inferior */
     .cv-main-content .content-grid:last-child {
-        margin-bottom: 0;
+      margin-bottom: 0;
     }
 
     /* ************************************************************ */
@@ -176,14 +182,17 @@
     .cv-main-content .content-grid:first-child .left-column {
       background-color: var(--color-info-box-bg);
       color: var(--color-texto-en-info-box);
-      padding: 30px 15px; /* Aumentado el padding vertical */
+      padding: 30px 15px;
+      /* Aumentado el padding vertical */
       display: flex;
       flex-direction: column;
-      gap: 30px; /* Aumentado el gap entre elementos */
+      gap: 30px;
+      /* Aumentado el gap entre elementos */
     }
 
     .cv-main-content .content-grid:first-child .left-column h2 {
-      font-size: 1.05em; /* Aumentado el tamaño de la letra */
+      font-size: 1.05em;
+      /* Aumentado el tamaño de la letra */
       text-transform: uppercase;
       border-bottom: 1px solid var(--color-acento-claro);
       padding-bottom: 5px;
@@ -193,7 +202,8 @@
 
     .cv-main-content .content-grid:first-child .left-column p {
       margin: 3px 0;
-      font-size: 0.9em; /* Aumentado el tamaño de la letra */
+      font-size: 0.9em;
+      /* Aumentado el tamaño de la letra */
     }
 
     .cv-main-content .content-grid:first-child .left-column a {
@@ -203,24 +213,31 @@
 
     .cv-main-content .content-grid:first-child .right-column {
       background-color: #ffffff;
-      padding: 30px 25px; /* Aumentado el padding vertical */
+      padding: 30px 25px;
+      /* Aumentado el padding vertical */
       display: flex;
       flex-direction: column;
-      gap: 30px; /* Aumentado el gap entre elementos */
+      gap: 30px;
+      /* Aumentado el gap entre elementos */
     }
 
     .cv-main-content .content-grid:first-child .right-column .section h3 {
-      font-size: 1.25em; /* Aumentado ligeramente */
+      font-size: 1.25em;
+      /* Aumentado ligeramente */
     }
 
     .cv-main-content .content-grid:first-child .right-column .section p {
-      line-height: 1.6em; /* Aumentado el interlineado */
-      font-size: 0.9em; /* Asegura consistencia */
+      line-height: 1.6em;
+      /* Aumentado el interlineado */
+      font-size: 0.9em;
+      /* Asegura consistencia */
     }
 
     .cv-main-content .content-grid:first-child .edu-content h4 {
-      font-size: 1em; /* Aumentado el tamaño de la letra */
+      font-size: 1em;
+      /* Aumentado el tamaño de la letra */
     }
+
     /* ************************************************************ */
 
 
@@ -228,10 +245,12 @@
     .cv-main-content .content-grid:last-child .left-column {
       background-color: var(--color-info-box-bg);
       color: var(--color-texto-en-info-box);
-      padding: 25px 15px; /* Mantener o ajustar si se desea un cambio aquí */
+      padding: 25px 15px;
+      /* Mantener o ajustar si se desea un cambio aquí */
       display: flex;
       flex-direction: column;
-      gap: 25px; /* Mantener o ajustar si se desea un cambio aquí */
+      gap: 25px;
+      /* Mantener o ajustar si se desea un cambio aquí */
     }
 
     .cv-main-content .content-grid:last-child .left-column h2 {
@@ -242,6 +261,7 @@
       margin: 0 0 8px 0;
       color: var(--color-acento-claro);
     }
+
     .cv-main-content .content-grid:last-child .left-column p {
       font-size: 0.85em;
     }
@@ -249,25 +269,34 @@
 
     .cv-main-content .content-grid:last-child .right-column {
       background-color: #ffffff;
-      padding: 25px 25px; /* Mantener o ajustar si se desea un cambio aquí */
+      padding: 25px 25px;
+      /* Mantener o ajustar si se desea un cambio aquí */
       display: flex;
       flex-direction: column;
-      gap: 25px; /* Mantener o ajustar si se desea un cambio aquí */
+      gap: 25px;
+      /* Mantener o ajustar si se desea un cambio aquí */
     }
 
     .cv-main-content .content-grid:last-child .right-column .section h3 {
-      font-size: 1.2em; /* Mantener o ajustar */
+      font-size: 1.2em;
+      /* Mantener o ajustar */
     }
+
     .cv-main-content .content-grid:last-child .right-column .section p {
-      line-height: 1.5em; /* Mantener o ajustar */
+      line-height: 1.5em;
+      /* Mantener o ajustar */
       font-size: 0.9em;
     }
+
     .cv-main-content .content-grid:last-child .exp-content p {
-      line-height: 1.5em; /* Aumentado el interlineado para las descripciones */
+      line-height: 1.5em;
+      /* Aumentado el interlineado para las descripciones */
     }
-    .cv-main-content .content-grid:last-child .edu-content h4, 
+
+    .cv-main-content .content-grid:last-child .edu-content h4,
     .cv-main-content .content-grid:last-child .exp-content h4 {
-      font-size: 1em; /* Aumentado el tamaño de la letra */
+      font-size: 1em;
+      /* Aumentado el tamaño de la letra */
     }
 
 
@@ -277,7 +306,8 @@
 
     .section h3 {
       color: var(--color-principal-dark);
-      font-size: 1.2em; /* Default para h3 */
+      font-size: 1.2em;
+      /* Default para h3 */
       margin-bottom: 8px;
       border-bottom: 2px solid var(--color-separador);
       display: inline-block;
@@ -287,18 +317,22 @@
 
     .section p {
       margin: 0 0 10px 0;
-      font-size: 0.9em; /* Default para p de sección */
-      line-height: 1.5em; /* Default para p de sección */
+      font-size: 0.9em;
+      /* Default para p de sección */
+      line-height: 1.5em;
+      /* Default para p de sección */
       text-align: justify;
     }
 
-    .edu-list, .exp-list { 
-      list-style: none; 
-      padding: 0; 
-      margin: 0; 
+    .edu-list,
+    .exp-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
-    .edu-item, .exp-item {
+    .edu-item,
+    .exp-item {
       display: flex;
       align-items: flex-start;
       margin-bottom: 18px;
@@ -306,7 +340,8 @@
       page-break-inside: avoid;
     }
 
-    .edu-item i, .exp-item i {
+    .edu-item i,
+    .exp-item i {
       font-size: 1.3em;
       color: #fff;
       background-color: var(--color-acento-claro);
@@ -314,11 +349,12 @@
       border-radius: 50%;
       margin-right: 12px;
       margin-top: 3px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
       flex-shrink: 0;
     }
 
-    .edu-item::before, .exp-item::before {
+    .edu-item::before,
+    .exp-item::before {
       content: '';
       position: absolute;
       left: 19px;
@@ -329,17 +365,21 @@
       z-index: -1;
     }
 
-    .edu-content, .exp-content {
+    .edu-content,
+    .exp-content {
       flex: 1;
     }
 
-    .edu-content h4, .exp-content h4 {
+    .edu-content h4,
+    .exp-content h4 {
       margin: 0 0 3px 0;
       color: var(--color-principal-dark);
-      font-size: 1em; /* Default para h4 */
+      font-size: 1em;
+      /* Default para h4 */
     }
 
-    .edu-content span, .exp-content span {
+    .edu-content span,
+    .exp-content span {
       font-size: 0.85em;
       color: #777;
     }
@@ -349,7 +389,8 @@
       margin: 5px 0 0 0;
       font-size: 0.85em;
       color: #555;
-      line-height: 1.5em; /* Default para descripciones de experiencia */
+      line-height: 1.5em;
+      /* Default para descripciones de experiencia */
     }
 
     /* Para impresión PDF */
@@ -360,30 +401,32 @@
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
-      
+
       .cv-container {
         box-shadow: none;
         margin: 0;
       }
-      
+
       .a4-page {
         box-shadow: none;
         margin: 0;
-        padding: 15mm 8mm; /* Asegura un margen uniforme de 8mm en impresión */
+        padding: 15mm 8mm;
+        /* Asegura un margen uniforme de 8mm en impresión */
         page-break-after: always;
       }
-      
+
       .a4-page:last-child {
         page-break-after: auto;
       }
 
       /* Reduce el margen de separación en impresión para ahorrar espacio */
       .content-grid {
-        margin-bottom: 15px; 
+        margin-bottom: 15px;
       }
-      
+
       /* OCULTAR EL BOTÓN EN LA IMPRESIÓN */
-      #btnPDF, .pdf-button-container {
+      #btnPDF,
+      .pdf-button-container {
         display: none !important;
       }
     }
@@ -395,85 +438,72 @@
   </style>
 
 </head>
+
 <body>
-  
-<div class="pdf-button-container">
-  <button id="btnPDF" onclick="downloadPDF()">
-    <i class="fas fa-file-pdf"></i> Descargar CV en PDF
-  </button>
-</div>
 
-<div class="cv-container" id="cv">
-  <div class="a4-page">
-    <header class="header-main">
-      <div class="header-info-box">
-        <h1>
-          <span style="color: white;">Julio César</span>
-          <span style="color: #3498db;">Saráuz Rivadeneira</span>
-        </h1>
-        <p>Ingeniero en Ciencias de la Computación</p>
-        <div class="contact-info">
-          <div><i class="fas fa-phone"></i> +593 961824593</div>
-          <div>
-            <i class="fab fa-linkedin"></i>
-            <a href="#" target="_blank">linkedin.com/in/tu-perfil</a>
-          </div>
-        </div>
-      </div>
-      <div class="header-photo-container">
-        <img
-          src="https://placehold.co/150x150/2c3e50/ffffff?text=JC+Sarauz"
-          alt="Foto de perfil"
-          onerror="this.src='https://placehold.co/150x150/2c3e50/ffffff?text=JC+Sarauz'"
-        />
-      </div>
-    </header>
+  <div class="pdf-button-container">
+    <button id="btnPDF" onclick="downloadPDF()">
+      <i class="fas fa-file-pdf"></i> Descargar CV en PDF
+    </button>
+  </div>
 
-    <div class="cv-main-content">
-      <div
-        class="content-grid"
-        id="first-row"
-        style="min-height: 500px; margin-bottom: 80px;"
-      >
-        <div class="left-column">
-          <div style="font-size: 0.9em; line-height: 1.8;">
-            <h2 style="color: var(--color-acento-claro); text-align: justify;">
-              Datos Personales
-            </h2>
-            <div style="padding-left: 35px;">
-              <p style="margin-bottom: 8px;">
-                <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i
-                >Quito, 28 de abril de 1998
-              </p>
-              <p style="margin-bottom: 8px;">
-                <i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i
-                >Conocoto, Pichincha, Ecuador
-              </p>
-              <p style="margin-bottom: 8px;">
-                <i class="fas fa-envelope" style="margin-right: 8px;"></i>
-                <a href="mailto:juliosarauz1i@gmail.com"
-                  >juliosarauz1i@gmail.com</a
-                >
-              </p>
-              <p style="margin-bottom: 8px;">
-                <i class="fas fa-flag" style="margin-right: 8px;"></i>
-                Ecuatoriano
-              </p>
-              <p style="margin-bottom: 8px;">
-                <i class="fab fa-github" style="margin-right: 8px;"></i>
-                <a href="https://github.com/JulioSarauz" target="_blank"
-                  >github.com/JulioSarauz</a
-                >
-              </p>
+  <div class="cv-container" id="cv">
+    <div class="a4-page">
+      <header class="header-main">
+        <div class="header-info-box">
+          <h1>
+            <span style="color: white;">Julio César</span>
+            <span style="color: #3498db;">Saráuz Rivadeneira</span>
+          </h1>
+          <p>Ingeniero en Ciencias de la Computación</p>
+          <div class="contact-info">
+            <div><i class="fas fa-phone"></i> +593 961824593</div>
+            <div>
+              <i class="fab fa-linkedin"></i>
+              <a href="#" target="_blank">linkedin.com/in/tu-perfil</a>
             </div>
           </div>
+        </div>
+        <div class="header-photo-container">
+          <img src="https://placehold.co/150x150/2c3e50/ffffff?text=JC+Sarauz" alt="Foto de perfil"
+            onerror="this.src='https://placehold.co/150x150/2c3e50/ffffff?text=JC+Sarauz'" />
+        </div>
+      </header>
 
-          <div style="font-size: 0.9em;">
-            <h2 style="color: var(--color-acento-claro); text-align: justify;">
-              Habilidades
-            </h2>
-            <div
-              style="
+      <div class="cv-main-content">
+        <div class="content-grid" id="first-row" style="min-height: 500px; margin-bottom: 120px;">
+          <div class="left-column">
+            <div style="font-size: 0.9em; line-height: 1.8;">
+              <h2 style="color: var(--color-acento-claro); text-align: justify;">
+                Datos Personales
+              </h2>
+              <div style="padding-left: 35px;">
+                <p style="margin-bottom: 8px;">
+                  <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>Quito, 28 de abril de 1998
+                </p>
+                <p style="margin-bottom: 8px;">
+                  <i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i>Conocoto, Pichincha, Ecuador
+                </p>
+                <p style="margin-bottom: 8px;">
+                  <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+                  <a href="mailto:juliosarauz1i@gmail.com">juliosarauz1i@gmail.com</a>
+                </p>
+                <p style="margin-bottom: 8px;">
+                  <i class="fas fa-flag" style="margin-right: 8px;"></i>
+                  Ecuatoriano
+                </p>
+                <p style="margin-bottom: 8px;">
+                  <i class="fab fa-github" style="margin-right: 8px;"></i>
+                  <a href="https://github.com/JulioSarauz" target="_blank">github.com/JulioSarauz</a>
+                </p>
+              </div>
+            </div>
+
+            <div style="font-size: 0.9em;">
+              <h2 style="color: var(--color-acento-claro); text-align: justify;">
+                Habilidades
+              </h2>
+              <div style="
                 background: var(--color-info-box-bg);
                 color: var(--color-texto-en-info-box);
                 padding: 12px 15px;
@@ -481,621 +511,698 @@
                 font-size: 0.9em;
                 line-height: 1.5em;
                 text-align: justify;
-              "
-            >
-              <div
-                style="display: flex; align-items: flex-start; margin-bottom: 6px;"
-              >
-                <i
-                  class="fas fa-code"
-                  style="
+              ">
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px;">
+                  <i class="fas fa-code" style="
                     width: 25px;
                     margin-right: 10px;
                     color: var(--color-acento-claro);
-                  "
-                ></i>
-                <div>
-                  <strong style="color: var(--color-acento-claro);"
-                    >Lenguajes:</strong
-                  >
-                  Java, Python, JavaScript, C#, PHP, Dart, TypeScript, C, Perl, R
+                  "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro);">Lenguajes:</strong>
+                    Java, Python, JavaScript, C#, PHP, Dart, TypeScript, C, Perl, R
+                  </div>
                 </div>
-              </div>
-              <div
-                style="display: flex; align-items: flex-start; margin-bottom: 6px;"
-              >
-                <i
-                  class="fas fa-cogs"
-                  style="
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px;">
+                  <i class="fas fa-cogs" style="
                     width: 25px;
                     margin-right: 10px;
                     color: var(--color-acento-claro);
-                  "
-                ></i>
-                <div>
-                  <strong style="color: var(--color-acento-claro);"
-                    >Frameworks / Backend:</strong
-                  >
-                  Node.js, Express, Nest.js, Flask, JQuery
+                  "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro);">Frameworks / Backend:</strong>
+                    Node.js, Express, Nest.js, Flask, JQuery
+                  </div>
                 </div>
-              </div>
-              <div
-                style="display: flex; align-items: flex-start; margin-bottom: 6px;"
-              >
-                <i
-                  class="fas fa-desktop"
-                  style="
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px;">
+                  <i class="fas fa-desktop" style="
                     width: 25px;
                     margin-right: 10px;
                     color: var(--color-acento-claro);
-                  "
-                ></i>
-                <div>
-                  <strong style="color: var(--color-acento-claro);"
-                    >Frontend / Web:</strong
-                  >
-                  React.js, Angular, Vue, HTML5, CSS, SCSS, JSP, JQuery
+                  "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro);">Frontend / Web:</strong>
+                    React.js, Angular, Vue, HTML5, CSS, SCSS, JSP, JQuery
+                  </div>
                 </div>
-              </div>
-              <div
-                style="display: flex; align-items: flex-start; margin-bottom: 6px;"
-              >
-                <i
-                  class="fas fa-database"
-                  style="
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px;">
+                  <i class="fas fa-database" style="
                     width: 25px;
                     margin-right: 10px;
                     color: var(--color-acento-claro);
-                  "
-                ></i>
-                <div>
-                  <strong style="color: var(--color-acento-claro);"
-                    >Bases de Datos:</strong
-                  >
-                  SQL Server, MySQL, PostgreSQL, MongoDB, MDB Atlas, DBeaver
+                  "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro);">Bases de Datos:</strong>
+                    SQL Server, MySQL, PostgreSQL, MongoDB, MDB Atlas, DBeaver
+                  </div>
                 </div>
-              </div>
-              <div
-                style="display: flex; align-items: flex-start; margin-bottom: 6px;"
-              >
-                <i
-                  class="fas fa-tools"
-                  style="
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px;">
+                  <i class="fas fa-tools" style="
                     width: 25px;
                     margin-right: 10px;
                     color: var(--color-acento-claro);
-                  "
-                ></i>
-                <div>
-                  <strong style="color: var(--color-acento-claro);"
-                    >DevOps / Versiones:</strong
-                  >
-                  Git, GitHub, GitLab, Docker, Azure DevOps, Heroku
+                  "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro);">DevOps / Versiones:</strong>
+                    Git, GitHub, GitLab, Docker, Azure DevOps, Heroku
+                  </div>
                 </div>
-              </div>
-              <div
-                style="display: flex; align-items: flex-start; margin-bottom: 6px;"
-              >
-                <i
-                  class="fas fa-mobile-alt"
-                  style="
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px;">
+                  <i class="fas fa-mobile-alt" style="
                     width: 25px;
                     margin-right: 10px;
                     color: var(--color-acento-claro);
-                  "
-                ></i>
-                <div>
-                  <strong style="color: var(--color-acento-claro);"
-                    >Móvil / Multiplataforma:</strong
-                  >
-                  Android Studio, Ionic, Firebase
+                  "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro);">Móvil / Multiplataforma:</strong>
+                    Android Studio, Ionic, Firebase
+                  </div>
                 </div>
-              </div>
-              <div
-                style="display: flex; align-items: flex-start; margin-bottom: 6px;"
-              >
-                <i
-                  class="fas fa-wrench"
-                  style="
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px;">
+                  <i class="fas fa-wrench" style="
                     width: 25px;
                     margin-right: 10px;
                     color: var(--color-acento-claro);
-                  "
-                ></i>
-                <div>
-                  <strong style="color: var(--color-acento-claro);"
-                    >Herramientas:</strong
-                  >
-                  VS Code, Arduino, Awk, Inkscape, Gimp, Figma
+                  "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro);">Herramientas:</strong>
+                    VS Code, Arduino, Awk, Inkscape, Gimp, Figma
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="right-column">
-          <div class="section">
-            <h3>Perfil Profesional</h3>
-            <div style="margin-top: 10px; line-height: 1.7;">
-              <p style="margin-bottom: 1em;">
-                Ingeniero en Ciencias de la Computación y Máster en Ingeniería de
-                Software y Sistemas Informáticos, con experiencia como
-                desarrollador full stack, integrando apps transaccionales,
-                soluciones web y automatizaciones institucionales.
-              </p>
-              <p>
-                Poseo conocimientos sólidos en arquitecturas de nube (Azure y
-                AWS), CI/CD, contenedores y DevOps. Certificado como Auditor
-                Interno ISO 9001:2015, con experiencia en banca y finanzas,
-                responsable, proactivo y apasionado por la programación y la
-                innovación tecnológica.
-              </p>
+          <div class="right-column">
+            <div class="section">
+              <h3>Perfil Profesional</h3>
+              <div style="margin-top: 10px; line-height: 1.7;">
+                <p style="margin-bottom: 1em;">
+                  Ingeniero en Ciencias de la Computación y Máster en Ingeniería de
+                  Software y Sistemas Informáticos, con experiencia como
+                  desarrollador full stack, integrando apps transaccionales,
+                  soluciones web y automatizaciones institucionales.
+                </p>
+                <p>
+                  Poseo conocimientos sólidos en arquitecturas de nube (Azure y
+                  AWS), CI/CD, contenedores y DevOps. Certificado como Auditor
+                  Interno ISO 9001:2015, con experiencia en banca y finanzas,
+                  responsable, proactivo y apasionado por la programación y la
+                  innovación tecnológica.
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="section">
-            <h3>Formación Académica</h3>
-            <ul class="edu-list" style="margin-top: 10px;">
-              <li class="edu-item">
-                <i class="fas fa-graduation-cap"></i>
-                <div class="edu-content">
-                  <h4>
-                    UNIR | Máster en Ingeniería de Software y Sistemas
-                    Informáticos
-                  </h4>
-                  <span>2025</span>
-                </div>
-              </li>
-              <li class="edu-item">
-                <i class="fas fa-graduation-cap"></i>
-                <div class="edu-content">
-                  <h4>
-                    Universidad Politécnica Salesiana | Ingeniería en Ciencias de
-                    la Computación
-                  </h4>
-                  <span>2022</span>
-                </div>
-              </li>
-              <li class="edu-item">
-                <i class="fas fa-graduation-cap"></i>
-                <div class="edu-content">
-                  <h4>
-                    Instituto "Benito Juárez" | Bachiller en Aplicaciones
-                    Informáticas
-                  </h4>
-                  <span>2016</span>
-                </div>
-              </li>
-              <li class="edu-item">
-                <i class="fas fa-school"></i>
-                <div class="edu-content">
-                  <h4>
-                    Escuela "José Miguel Leoro Vásquez" | Primaria
-                  </h4>
-                  <span>2010</span>
-                </div>
-              </li>
-            </ul>
+            <div class="section">
+              <h3>Formación Académica</h3>
+              <ul class="edu-list" style="margin-top: 10px;">
+                <li class="edu-item">
+                  <i class="fas fa-graduation-cap"></i>
+                  <div class="edu-content">
+                    <h4>
+                      UNIR | Máster en Ingeniería de Software y Sistemas
+                      Informáticos
+                    </h4>
+                    <span>2025</span>
+                  </div>
+                </li>
+                <li class="edu-item">
+                  <i class="fas fa-graduation-cap"></i>
+                  <div class="edu-content">
+                    <h4>
+                      Universidad Politécnica Salesiana | Ingeniería en Ciencias de
+                      la Computación
+                    </h4>
+                    <span>2022</span>
+                  </div>
+                </li>
+                <li class="edu-item">
+                  <i class="fas fa-graduation-cap"></i>
+                  <div class="edu-content">
+                    <h4>
+                      Instituto "Benito Juárez" | Bachiller en Aplicaciones
+                      Informáticas
+                    </h4>
+                    <span>2016</span>
+                  </div>
+                </li>
+                <li class="edu-item">
+                  <i class="fas fa-school"></i>
+                  <div class="edu-content">
+                    <h4>
+                      Escuela "José Miguel Leoro Vásquez" | Primaria
+                    </h4>
+                    <span>2010</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="content-grid">
-        <div class="left-column">
-          <div class="section">
-            <h3 style="color: var(--color-acento-claro);">
-              Cursos y Certificaciones
-            </h3>
-            <div
-              style="
-                background: var(--color-info-box-bg);
-                color: var(--color-texto-en-info-box);
-                padding: 15px 18px;
-                border-radius: 10px;
-                font-size: 0.85em;
-                line-height: 1.4em;
-              "
-            >
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >DevOps en acción</strong
-                >
-                - EELA Institute & Universidad de los Hemisferios (120h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >El arte de contar historias</strong
-                >
-                - goodhabitz (6h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Gestión del cambio</strong
-                >
-                - goodhabitz (8h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Trabajo en equipo</strong
-                >
-                - goodhabitz (7h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Angular 11</strong
-                >
-                - Udemy (18h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Git, HTML, Typescript</strong
-                >
-                - Udemy (3-5h cada uno)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Educación Financiera I & II</strong
-                >
-                (5-8h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Impacto Financiero Violencia Mujeres</strong
-                >
-                (5h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Riesgos, Administración y SEPS</strong
-                >
-                (varios, 2-10h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Finanzas Verdes & Auditorías</strong
-                >
-                (2-8h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Microsoft Azure AI</strong
-                >
-                - Achievement (32h) / Azure Basics (8h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Seguridad de la Información</strong
-                >
-                - Microsoft (80h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >SQL & Power BI</strong
-                >
-                - Denarius (8h)
-              </p>
-              <p style="margin: 4px 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Captación y Crédito</strong
-                >
-                - 29 de Octubre (2-5h)
-              </p>
-            </div>
-          </div>
-
-          <div style="margin-bottom: 14px;">
-            <h2 style="color: var(--color-acento-claro);">Idiomas</h2>
-            <div style="margin-bottom: 14px;">
-              <p style="margin: 0 0 4px 0; font-weight: 600;">
-                Español (Nativo)
-              </p>
-              <div
-                style="
-                  background: #d0d0d0;
-                  border-radius: 5px;
-                  height: 12px;
-                  overflow: hidden;
-                "
-              >
-                <div style="width: 100%; height: 100%; background: #3498db;"></div>
+      <div class="cv-main-content">
+        <div class="content-grid" id="first-half" style="min-height: 500px; margin-bottom: 80px;">
+          <div class="left-column">
+            <div style="font-size: 0.9em">
+              <h2 style="color: var(--color-acento-claro); text-align: justify">
+                Cursos y Certificaciones
+              </h2>
+              <div style="
+            background: var(--color-info-box-bg);
+            color: var(--color-texto-en-info-box);
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            line-height: 1.5em;
+            text-align: justify;
+          ">
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">DevOps en acción:</strong>
+                    EELA Institute & Universidad de los Hemisferios (120h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">El arte de contar historias:</strong>
+                    goodhabitz (6h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Gestión del cambio:</strong>
+                    goodhabitz (8h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Trabajo en equipo:</strong>
+                    goodhabitz (7h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Angular 11:</strong>
+                    Udemy (18h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Git, HTML, Typescript:</strong>
+                    Udemy (3-5h cada uno)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Educación Financiera I & II:</strong>
+                    (5-8h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Impacto Financiero Violencia Mujeres:</strong>
+                    (5h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Riesgos, Administración y SEPS:</strong>
+                    (varios, 2-10h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Finanzas Verdes & Auditorías:</strong>
+                    (2-8h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Microsoft Azure AI:</strong>
+                    - Achievement (32h) / Azure Basics (8h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Seguridad de la Información:</strong>
+                    - Microsoft (80h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">SQL & Power BI:</strong>
+                    - Denarius (8h)
+                  </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; margin-bottom: 6px">
+                  <i class="fas fa-certificate" style="
+                width: 25px;
+                margin-right: 10px;
+                color: var(--color-acento-claro);
+              "></i>
+                  <div>
+                    <strong style="color: var(--color-acento-claro)">Captación y Crédito:</strong>
+                    - 29 de Octubre (2-5h)
+                  </div>
+                </div>
               </div>
             </div>
-            <div style="margin-bottom: 14px;">
-              <p style="margin: 0 0 4px 0; font-weight: 600;">
-                Inglés (Intermedio)
-              </p>
-              <div
-                style="
-                  background: #d0d0d0;
-                  border-radius: 5px;
-                  height: 12px;
-                  overflow: hidden;
-                "
-              >
-                <div style="width: 60%; height: 100%; background: #3498db;"></div>
+
+            <div style="font-size: 0.9em; line-height: 1.8; margin-top: 30px">
+              <h2 style="color: var(--color-acento-claro); text-align: justify">
+                Idiomas
+              </h2>
+              <div style="padding-left: 35px">
+                <div style="margin-bottom: 14px">
+                  <p style="margin: 0 0 4px 0; font-weight: 600">Español (Nativo)</p>
+                  <div style="
+                background: #d0d0d0;
+                border-radius: 5px;
+                height: 12px;
+                overflow: hidden;
+              ">
+                    <div style="width: 100%; height: 100%; background: #3498db"></div>
+                  </div>
+                </div>
+                <div style="margin-bottom: 14px">
+                  <p style="margin: 0 0 4px 0; font-weight: 600">
+                    Inglés (Intermedio)
+                  </p>
+                  <div style="
+                background: #d0d0d0;
+                border-radius: 5px;
+                height: 12px;
+                overflow: hidden;
+              ">
+                    <div style="width: 60%; height: 100%; background: #3498db"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div>
-            <h2 style="color: var(--color-acento-claro); text-align: justify;">
-              Referencias Personales
-            </h2>
-            <div
-              style="
-                background: var(--color-info-box-bg);
-                color: var(--color-texto-en-info-box);
-                padding: 15px 18px;
-                border-radius: 10px;
-                font-size: 0.85em;
-                line-height: 1.5em;
-              "
-            >
-              <p style="margin-bottom: 10px;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Andrea Nataly Saráuz Rivadeneira</strong
-                ><br />
-                <span style="color: #ccc;">Procuradora Judicial</span><br />
-                <span style="color: var(--color-acento-claro); font-weight: 600;"
-                  >Celular:</span
-                >
-                +593996296751
-              </p>
-              <p style="margin-bottom: 10px;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Luz Angelica Pailacho Martinez</strong
-                ><br />
-                <span style="color: #ccc;">Gerente Imak Smart</span><br />
-                <span style="color: var(--color-acento-claro); font-weight: 600;"
-                  >Celular:</span
-                >
-                +593997667941
-              </p>
-              <p style="margin-bottom: 10px;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Beatriz Alexandra Zhinin Ruales</strong
-                ><br />
-                <span style="color: #ccc;">Subgerente Tecnología Dinners</span
-                ><br />
-                <span style="color: var(--color-acento-claro); font-weight: 600;"
-                  >Celular:</span
-                >
-                +59399835521
-              </p>
-              <p style="margin-bottom: 0;">
-                <strong style="color: var(--color-acento-claro);"
-                  >Sabina Gabriela Zhiminaicela Tapia</strong
-                ><br />
-                <span style="color: #ccc;">Jefa de Responsabilidad Social</span
-                ><br />
-                <span style="color: var(--color-acento-claro); font-weight: 600;"
-                  >Celular:</span
-                >
-                +593987692511
-              </p>
+          <div class="right-column">
+            <div class="section">
+              <h3>Experiencia Laboral</h3>
+              <ul class="exp-list" style="margin-top: 10px">
+                <li class="exp-item">
+                  <i class="fas fa-code"></i>
+                  <div class="exp-content">
+                    <h4>Analista de Desarrollo | Cooperativa de Ahorro y Crédito 29 de Octubre</h4>
+                    <span>2022 - Actual</span>
+                    <p>
+                      Implementación de proyectos innovadores para la automatización de
+                      procesos mediante metodologías ágiles, administración de
+                      ambientes en la nube, responsable de documentación y
+                      actualización de repositorios remotos para QA y encargado de la
+                      comunicación con múltiples proveedores a través de API’s SOAP y
+                      REST.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fas fa-users-cog"></i>
+                  <div class="exp-content">
+                    <h4>Jefe de Desarrollo (E) | Cooperativa de Ahorro y Crédito 29 de Octubre</h4>
+                    <span>2023</span>
+                    <p>
+                      Durante los cambios administrativos, se me asignó la
+                      responsabilidad de gestionar el área de desarrollo de la
+                      Cooperativa 29 de Octubre. En este rol, guie al equipo en el
+                      uso de herramientas de seguimiento y despliegue continuo, como
+                      DevOps. Además, implementamos estadísticas de desempeño e
+                      indicadores de costo-beneficio para evaluar los distintos
+                      aplicativos entregados a las diversas áreas. Fue una
+                      experiencia enriquecedora que me permitió aprender y desarrollar
+                      habilidades de liderazgo al frente del equipo.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fas fa-laptop-code"></i>
+                  <div class="exp-content">
+                    <h4>Pasante | Cooperativa de Ahorro y Crédito 29 de Octubre</h4>
+                    <span>2021</span>
+                    <p>
+                      En el área de gestión de aplicaciones, diseñé, desarrollé e
+                      implementé proyectos para mejorar la gestión de diversas áreas
+                      de la cooperativa, todo bajo metodologías ágiles y
+                      cumplimiento de estándares de calidad.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fas fa-handshake"></i>
+                  <div class="exp-content">
+                    <h4>Agente | Abogados externos de CNT</h4>
+                    <span>2020</span>
+                    <p>
+                      Gestioné la cartera de cobranzas para las coactivas de CNT,
+                      puesto donde desarrollé habilidades de comunicación con
+                      diversas clases de clientes, adquiriendo nuevas virtudes
+                      personales y comprendiendo el proceso jurídico que recae en
+                      las personas que presenten deudas pendientes con este tipo de
+                      empresas.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fas fa-hands-helping"></i>
+                  <div class="exp-content">
+                    <h4>Voluntario | Centro Hospedería Campesina “La Tola”</h4>
+                    <span>2020</span>
+                    <p>
+                      Tareas enfocadas hacia la ayuda humanitaria en las áreas
+                      vulnerables del sur de Quito, donde junto a un grupo de
+                      voluntarios se realizó diversas actividades, como
+                      organización de víveres, limpieza de áreas de atención, etc.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                  <div class="exp-content">
+                    <h4>Capacitador | Fenedif – CONADIS</h4>
+                    <span>2019</span>
+                    <p>
+                      Se brindó capacitaciones a personas con diferente tipo de
+                      discapacidad, usuarios del Servicio de Integración laboral
+                      (SIL), en la Universidad Politécnica Salesiana, campus girón.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fas fa-desktop"></i>
+                  <div class="exp-content">
+                    <h4>Pasante | Banco Nacional de Fomento</h4>
+                    <span>2015</span>
+                    <p>
+                      En el área de mesa de ayuda, se me asignó las tareas de
+                      atender diferentes calamidades de los diferentes
+                      departamentos, en problemas de software o hardware.
+                    </p>
+                  </div>
+                </li>
+              </ul>
             </div>
-          </div>
-        </div>
 
-        <div class="right-column">
-          <div class="section">
-            <h3>Experiencia Laboral</h3>
-            <ul class="exp-list" style="margin-top: 10px;">
-              <li class="exp-item">
-                <i class="fas fa-code"></i>
-                <div class="exp-content">
-                  <h4>Analista de Desarrollo | Cooperativa 29 de Octubre</h4>
-                  <span>2022 - Actual</span>
-                  <p>
-                    Implementación de proyectos innovadores para la
-                    automatización de procesos mediante metodologías ágiles,
-                    administración de ambientes en la nube, y documentación
-                    técnica.
-                  </p>
-                </div>
-              </li>
 
-              <li class="exp-item">
-                <i class="fas fa-users-cog"></i>
-                <div class="exp-content">
-                  <h4>Jefe de Desarrollo (E) | Cooperativa 29 de Octubre</h4>
-                  <span>2023</span>
-                  <p>
-                    Lideré el equipo de desarrollo, implementando estrategias
-                    DevOps y métricas de desempeño para optimizar los
-                    aplicativos internos.
-                  </p>
-                </div>
-              </li>
-
-              <li class="exp-item">
-                <i class="fas fa-laptop-code"></i>
-                <div class="exp-content">
-                  <h4>Pasante | Cooperativa 29 de Octubre</h4>
-                  <span>2021</span>
-                  <p>
-                    Diseño y desarrollo de proyectos internos bajo metodologías
-                    ágiles.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="section">
-            <h3>Proyectos Relevantes Realizados</h3>
-            <ul class="exp-list" style="margin-top: 10px;">
-              <li class="exp-item">
-                <i class="fa-solid fa-mobile-screen-button"></i>
-                <div class="exp-content">
-                  <h4>
-                    Migración Canales Digitales (WEB/APP)
-                    <span>| Cooperativa 29 de Octubre</span>
-                  </h4>
-                  <span>2024</span>
-                  <p>
-                    Lideré el desarrollo de la app móvil y plataforma web
-                    transaccional, con mejor seguridad, escalabilidad y
-                    accesibilidad. Implementación conforme a la Ley de Protección
-                    de Datos.
-                  </p>
-                </div>
-              </li>
-
-              <li class="exp-item">
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-                <div class="exp-content">
-                  <h4>
-                    Pago de Corresponsales
-                    <span>| Cooperativa 29 de Octubre</span>
-                  </h4>
-                  <span>2023</span>
-                  <p>
-                    Integración del bus de servicios con la plataforma Facilito,
-                    creando una red de pagos que amplió la cobertura y optimizó
-                    procesos transaccionales.
-                  </p>
-                </div>
-              </li>
-
-              <li class="exp-item">
-                <i class="fa-solid fa-trophy"></i>
-                <div class="exp-content">
-                  <h4>Ruleta29 <span>| Cooperativa 29 de Octubre</span></h4>
-                  <span>2023</span>
-                  <p>
-                    Desarrollé una app que automatiza sorteos con selección
-                    aleatoria y reportes, garantizando transparencia y eficiencia
-                    en los procesos de premiación.
-                  </p>
-                </div>
-              </li>
-
-              <li class="exp-item">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                <div class="exp-content">
-                  <h4>
-                    Migración Bus de Servicios
-                    <span>| Cooperativa 29 de Octubre</span>
-                  </h4>
-                  <span>2023</span>
-                  <p>
-                    Diseño y migración del bus de servicios hacia Azure con
-                    arquitectura modular y autoescalable, reduciendo costos y
-                    mejorando la disponibilidad.
-                  </p>
-                </div>
-              </li>
-
-              <li class="exp-item">
-                <i class="fa-solid fa-scale-balanced"></i>
-                <div class="exp-content">
-                  <h4>
-                    Facturas de Abogados Externos
-                    <span>| Cooperativa 29 de Octubre</span>
-                  </h4>
-                  <span>2022</span>
-                  <p>
-                    Portal para registro y control de pagos de servicios legales,
-                    mejorando la eficiencia y transparencia en la gestión
-                    jurídica.
-                  </p>
-                </div>
-              </li>
-
-              <li class="exp-item">
-                <i class="fa-solid fa-utensils"></i>
-                <div class="exp-content">
-                  <h4>La Weka <span>| Personal</span></h4>
-                  <span>2021</span>
-                  <p>
-                    App cliente-servidor que conecta comensales y locales de
-                    comida mediante recomendaciones y promociones. Desarrollada
-                    para Android.
-                  </p>
-                </div>
-              </li>
-
-              <li class="exp-item">
-                <i class="fa-solid fa-qrcode"></i>
-                <div class="exp-content">
-                  <h4>QR Creador <span>| Personal</span></h4>
-                  <span>2025</span>
-                  <p>
-                    Aplicación móvil híbrida para generar y escanear códigos QR,
-                    publicada en Google Play e integrada con AdMob para
-                    monetización.
-                  </p>
-                </div>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
+
+      <div class="cv-main-content">
+        <div class="content-grid" id="second-half" style="min-height: 500px; margin-top: 30px;">
+          <div class="left-column">
+            <div style="font-size: 0.9em">
+              <h2 style="color: var(--color-acento-claro); text-align: justify">
+                Referencias Personales
+              </h2>
+              <div style="
+            background: var(--color-info-box-bg);
+            color: var(--color-texto-en-info-box);
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            line-height: 1.5em;
+            text-align: justify;
+          ">
+                <p style="margin-bottom: 10px">
+                  <strong style="color: var(--color-acento-claro)">Andrea Nataly Saráuz Rivadeneira</strong><br />
+                  <span style="color: #ccc">Procuradora Judicial</span><br />
+                  <span style="color: var(--color-acento-claro); font-weight: 600">Celular:</span>
+                  +593996296751
+                </p>
+                <p style="margin-bottom: 10px">
+                  <strong style="color: var(--color-acento-claro)">Luz Angelica Pailacho Martinez</strong><br />
+                  <span style="color: #ccc">Gerente Imak Smart</span><br />
+                  <span style="color: var(--color-acento-claro); font-weight: 600">Celular:</span>
+                  +593997667941
+                </p>
+                <p style="margin-bottom: 10px">
+                  <strong style="color: var(--color-acento-claro)">Beatriz Alexandra Zhinin Ruales</strong><br />
+                  <span style="color: #ccc">Subgerente Tecnología Dinners</span><br />
+                  <span style="color: var(--color-acento-claro); font-weight: 600">Celular:</span>
+                  +59399835521
+                </p>
+                <p style="margin-bottom: 0">
+                  <strong style="color: var(--color-acento-claro)">Sabina Gabriela Zhiminaicela Tapia</strong><br />
+                  <span style="color: #ccc">Jefa de Responsabilidad Social</span><br />
+                  <span style="color: var(--color-acento-claro); font-weight: 600">Celular:</span>
+                  +593987692511
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-column">
+            <div class="section">
+              <h3>Proyectos Relevantes Realizados</h3>
+              <ul class="exp-list" style="margin-top: 10px">
+                <li class="exp-item">
+                  <i class="fa-solid fa-mobile-screen-button"></i>
+                  <div class="exp-content">
+                    <h4>
+                      Migración Canales Digitales (WEB/APP)
+                      <span>| Cooperativa 29 de Octubre</span>
+                    </h4>
+                    <span>2024</span>
+                    <p>
+                      Lideré el desarrollo de la app móvil y plataforma web
+                      transaccional, con mejor seguridad, escalabilidad y
+                      accesibilidad. Implementación conforme a la Ley de Protección de
+                      Datos.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fa-solid fa-hand-holding-dollar"></i>
+                  <div class="exp-content">
+                    <h4>
+                      Pago de Corresponsales
+                      <span>| Cooperativa 29 de Octubre</span>
+                    </h4>
+                    <span>2023</span>
+                    <p>
+                      Integración del bus de servicios con la plataforma Facilito,
+                      creando una red de pagos que amplió la cobertura y optimizó
+                      procesos transaccionales.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fa-solid fa-trophy"></i>
+                  <div class="exp-content">
+                    <h4>Ruleta29 <span>| Cooperativa 29 de Octubre</span></h4>
+                    <span>2023</span>
+                    <p>
+                      Desarrollé una app que automatiza sorteos con selección
+                      aleatoria y reportes, garantizando transparencia y eficiencia en
+                      los procesos de premiación.
+                    </p>
+                  </div>
+                </li>
+           
+                <li class="exp-item">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                  <div class="exp-content">
+                    <h4>
+                      Migración Bus de Servicios
+                      <span>| Cooperativa 29 de Octubre</span>
+                    </h4>
+                    <span>2023</span>
+                    <p>
+                      Diseño y migración del bus de servicios hacia Azure con
+                      arquitectura modular y autoescalable, reduciendo costos y
+                      mejorando la disponibilidad.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fa-solid fa-scale-balanced"></i>
+                  <div class="exp-content">
+                    <h4>
+                      Facturas de Abogados Externos
+                      <span>| Cooperativa 29 de Octubre</span>
+                    </h4>
+                    <span>2022</span>
+                    <p>
+                      Portal para registro y control de pagos de servicios legales,
+                      mejorando la eficiencia y transparencia en la gestión jurídica.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fa-solid fa-utensils"></i>
+                  <div class="exp-content">
+                    <h4>La Weka <span>| Personal</span></h4>
+                    <span>2021</span>
+                    <p>
+                      App cliente-servidor que conecta comensales y locales de comida
+                      mediante recomendaciones y promociones. Desarrollada para
+                      Android.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="exp-item">
+                  <i class="fa-solid fa-qrcode"></i>
+                  <div class="exp-content">
+                    <h4>QR Creador <span>| Personal</span></h4>
+                    <span>2025</span>
+                    <p>
+                      Aplicación móvil híbrida para generar y escanear códigos QR,
+                      publicada en Google Play e integrada con AdMob para
+                      monetización.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
-<script>
-  /**
-   * Función para descargar el CV como PDF usando html2canvas y jsPDF.
-   * La lógica ha sido ajustada para manejar posibles múltiples páginas A4.
-   */
-  window.jsPDF = window.jspdf.jsPDF;
+  <script>
+    /**
+     * Función para descargar el CV como PDF usando html2canvas y jsPDF.
+     * La lógica ha sido ajustada para manejar posibles múltiples páginas A4.
+     */
+    window.jsPDF = window.jspdf.jsPDF;
 
-  function downloadPDF() {
+    function downloadPDF() {
       const element = document.getElementById('cv');
       const filename = 'Julio_Sarauz_CV.pdf';
       const btn = document.getElementById('btnPDF');
-      
+
       // Mostrar indicador de carga
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando PDF...';
       btn.disabled = true;
 
       // Usar escala superior para mejor resolución
       html2canvas(element, {
-          scale: 3, 
-          logging: true,
-          useCORS: true,
-          allowTaint: true,
-          scrollX: 0,
-          scrollY: 0,
-          windowWidth: element.scrollWidth,
-          windowHeight: element.scrollHeight,
+        scale: 3,
+        logging: true,
+        useCORS: true,
+        allowTaint: true,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight,
       }).then(canvas => {
-          const imgData = canvas.toDataURL('image/png');
-          const pdf = new jsPDF('p', 'mm', 'a4');
-          const imgWidth = 210; // A4 width in mm
-          const pageHeight = 297; // A4 height in mm
-          const imgHeight = (canvas.height * imgWidth) / canvas.width;
-          let heightLeft = imgHeight;
-          let position = 0;
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgWidth = 210; // A4 width in mm
+        const pageHeight = 297; // A4 height in mm
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
 
-          // Añadir la primera página
+        // Añadir la primera página
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        // Bucle para añadir páginas adicionales si el contenido es demasiado largo
+        while (heightLeft >= -1) { // -1 para asegurar que se capture contenido muy justo
+          position = heightLeft - imgHeight;
+          pdf.addPage();
           pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
           heightLeft -= pageHeight;
+        }
 
-          // Bucle para añadir páginas adicionales si el contenido es demasiado largo
-          while (heightLeft >= -1) { // -1 para asegurar que se capture contenido muy justo
-              position = heightLeft - imgHeight;
-              pdf.addPage();
-              pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-              heightLeft -= pageHeight;
-          }
+        pdf.save(filename);
 
-          pdf.save(filename);
-          
       }).catch(error => {
-          console.error("Error generating PDF:", error);
-          // Mostrar mensaje de error al usuario
-          btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error al generar PDF';
+        console.error("Error generating PDF:", error);
+        // Mostrar mensaje de error al usuario
+        btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error al generar PDF';
       }).finally(() => {
-           // Restaurar el botón
-           setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-file-pdf"></i> Descargar CV en PDF';
-                btn.disabled = false;
-           }, 3000);
+        // Restaurar el botón
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-file-pdf"></i> Descargar CV en PDF';
+          btn.disabled = false;
+        }, 3000);
       });
-  }
-</script>
+    }
+  </script>
 </body>
+
 </html>
